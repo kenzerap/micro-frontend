@@ -1,4 +1,10 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 // import { mount } from 'productApp/ProductApp';
 
@@ -9,13 +15,18 @@ import { RouterOutlet } from '@angular/router';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewInit {
   title = 'container';
   @ViewChild('productApp') productApp: ElementRef = new ElementRef(null);
   constructor() {}
+  ngAfterViewInit(): void {
+    console.log('ngAfterViewInit: ', this.productApp);
+    // console.log('mount: ', mount);
+    // mount(this.productApp.nativeElement);
+  }
+
   ngOnInit(): void {
     // setTimeout(() => {
-    //   const ele = document.getElementById('product-app');
     //   console.log('angular app: ', mount);
     //   console.log('this.productApp.nativeElement: ', this.productApp);
     //   mount(this.productApp.nativeElement);
