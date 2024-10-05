@@ -1,3 +1,23 @@
-:host {
-  display: block;
+.bar {
+  display: grid;
+  grid-template-columns: 7rem auto 6rem;
+  align-items: center;
+  background-color: cadetblue;
+  padding: 0.5rem 1rem;
+}
+
+.menu-bar {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.btn-menu {
+  border-radius: 0;
+  color: black !important;
+  font-weight: bold;
+}
+
+.logo {
+  font-weight: bold;
 }
