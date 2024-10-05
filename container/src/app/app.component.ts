@@ -1,35 +1,16 @@
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-// import { mount } from 'productApp/ProductApp';
+import { HeaderComponent } from '../shared/components/header/header.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, HeaderComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
-export class AppComponent implements OnInit, AfterViewInit {
-  title = 'container';
-  @ViewChild('productApp') productApp: ElementRef = new ElementRef(null);
+export class AppComponent implements OnInit {
   constructor() {}
-  ngAfterViewInit(): void {
-    console.log('ngAfterViewInit: ', this.productApp);
-    // console.log('mount: ', mount);
-    // mount(this.productApp.nativeElement);
-  }
 
-  ngOnInit(): void {
-    // setTimeout(() => {
-    //   console.log('angular app: ', mount);
-    //   console.log('this.productApp.nativeElement: ', this.productApp);
-    //   mount(this.productApp.nativeElement);
-    // }, 0);
-  }
+  ngOnInit(): void {}
 }
