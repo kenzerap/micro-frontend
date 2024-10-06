@@ -6,6 +6,7 @@ import {
   ElementRef,
   ViewChild,
 } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-products',
@@ -18,12 +19,12 @@ import {
 export class ProductsComponent implements AfterViewInit {
   @ViewChild('productApp') productApp!: ElementRef;
 
-  constructor() {}
+  constructor(private router: Router) {}
 
   async ngAfterViewInit(): Promise<void> {
     try {
       const { mount } = await import('productApp/ProductApp');
-      mount(this.productApp.nativeElement);
+      mount(this.productApp.nativeElement, { url: this.router.url });
     } catch (err) {
       console.error('Error loading React remote component:', err);
     }
