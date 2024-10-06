@@ -22,11 +22,17 @@ export class ProductsComponent implements AfterViewInit {
   constructor(private router: Router) {}
 
   async ngAfterViewInit(): Promise<void> {
-    try {
-      const { mount } = await import('productApp/ProductApp');
-      mount(this.productApp.nativeElement, { url: this.router.url });
-    } catch (err) {
-      console.error('Error loading React remote component:', err);
-    }
+    const { mount } = await import('productApp/ProductApp');
+    mount(this.productApp.nativeElement, {
+      url: this.router.url,
+    });
+
+    /* this.router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe((event) => {
+        this.url = event.url;
+        console.log('router.events: ', event.url);
+        navigateUrl(event.url);
+      }); */
   }
 }

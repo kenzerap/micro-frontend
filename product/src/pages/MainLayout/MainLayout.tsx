@@ -4,7 +4,9 @@ import { setAuthState } from '../../store/reducers/authSlice';
 import ToastMessage from '../../components/ToastMessage/ToastMessage';
 import { Outlet, useNavigate } from 'react-router-dom';
 
-const MainLayout: React.FC<{ url: string }> = ({ url }) => {
+const MainLayout: React.FC<{
+  url: string;
+}> = ({ url }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 

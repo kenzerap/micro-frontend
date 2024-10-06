@@ -34,6 +34,7 @@ function App({ url }: { url?: string }) {
   const [router, setRouter] = useState<any>(null);
 
   useEffect(() => {
+    console.log('url: ', url);
     const initRoute = createBrowserRouter([
       {
         path: '/',
