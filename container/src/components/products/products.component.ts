@@ -23,13 +23,15 @@ export class ProductsComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('productApp') productApp!: ElementRef;
   root: any;
 
-  constructor(private store: Store) {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {}
 
   async ngAfterViewInit(): Promise<void> {
     const { mount } = await import('productApp/ProductApp');
-    const { root } = mount(this.productApp.nativeElement);
+    const { root } = mount(this.productApp.nativeElement, {
+      url: this.router.url,
+    });
     this.root = root;
   }
 

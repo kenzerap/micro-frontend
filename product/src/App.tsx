@@ -29,41 +29,41 @@ axios.interceptors.response.use(
   }
 );
 
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <MainLayout></MainLayout>,
-    errorElement: <PageNotFound />,
-    children: [
-      {
-        path: '',
-        async lazy(): Promise<any> {
-          const HomePage = (await import('./pages/Home/Home')).default;
-          return { Component: HomePage };
+function App({ url }: { url: string }) {
+  const router = createBrowserRouter([
+    {
+      path: '/',
+      element: <MainLayout url={url}></MainLayout>,
+      errorElement: <PageNotFound />,
+      children: [
+        {
+          path: '',
+          async lazy(): Promise<any> {
+            const HomePage = (await import('./pages/Home/Home')).default;
+            return { Component: HomePage };
+          },
         },
-      },
-      {
-        path: 'products',
-        async lazy(): Promise<any> {
-          const ProductsPage = (await import('./pages/Products/Products'))
-            .default;
-          return { Component: ProductsPage };
+        {
+          path: 'products',
+          async lazy(): Promise<any> {
+            const ProductsPage = (await import('./pages/Products/Products'))
+              .default;
+            return { Component: ProductsPage };
+          },
         },
-      },
-      {
-        path: 'products/:productId/view',
-        async lazy(): Promise<any> {
-          const ProductViewPage = (
-            await import('./pages/ProductViewDetail/ProductViewDetail')
-          ).default;
-          return { Component: ProductViewPage };
+        {
+          path: 'products/:productId/view',
+          async lazy(): Promise<any> {
+            const ProductViewPage = (
+              await import('./pages/ProductViewDetail/ProductViewDetail')
+            ).default;
+            return { Component: ProductViewPage };
+          },
         },
-      },
-    ],
-  },
-]);
+      ],
+    },
+  ]);
 
-function App() {
   return (
     <Provider store={store}>
       <RouterProvider router={router} />

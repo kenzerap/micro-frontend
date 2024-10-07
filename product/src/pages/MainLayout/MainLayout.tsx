@@ -5,7 +5,7 @@ import ToastMessage from '../../components/ToastMessage/ToastMessage';
 import { Outlet, useNavigate } from 'react-router-dom';
 import * as fromReducer from '../../store/reducers';
 
-const MainLayout: React.FC = () => {
+const MainLayout: React.FC<{ url: string }> = ({ url }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -25,6 +25,11 @@ const MainLayout: React.FC = () => {
     const user = userInfo ? JSON.parse(userInfo) : null;
 
     dispatch(setAuthState({ token, user }));
+
+    // issue
+    if (url) {
+      navigate(url);
+    }
     window.addEventListener('containerState', handleSystemStateChange);
 
     return () => {
