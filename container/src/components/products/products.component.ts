@@ -4,9 +4,12 @@ import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
+  OnDestroy,
+  OnInit,
   ViewChild,
 } from '@angular/core';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-products',
@@ -16,23 +19,21 @@ import { Router } from '@angular/router';
   styleUrl: './products.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ProductsComponent implements AfterViewInit {
+export class ProductsComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('productApp') productApp!: ElementRef;
+  root: any;
 
-  constructor(private router: Router) {}
+  constructor(private store: Store) {}
+
+  ngOnInit(): void {}
 
   async ngAfterViewInit(): Promise<void> {
     const { mount } = await import('productApp/ProductApp');
-    mount(this.productApp.nativeElement, {
-      url: this.router.url,
-    });
+    const { root } = mount(this.productApp.nativeElement);
+    this.root = root;
+  }
 
-    /* this.router.events
-      .pipe(filter((event) => event instanceof NavigationEnd))
-      .subscribe((event) => {
-        this.url = event.url;
-        console.log('router.events: ', event.url);
-        navigateUrl(event.url);
-      }); */
+  ngOnDestroy(): void {
+    this.root.unmount();
   }
 }

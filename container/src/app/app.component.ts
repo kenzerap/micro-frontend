@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { HeaderComponent } from '../shared/components/header/header.component';
+import { Store } from '@ngrx/store';
+import * as AppActions from './store/app.actions';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +13,26 @@ import { HeaderComponent } from '../shared/components/header/header.component';
   styleUrl: './app.component.scss',
 })
 export class AppComponent implements OnInit {
-  constructor() {}
+  constructor(private store: Store, private router: Router) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe((event) => {
+        window.dispatchEvent(
+          new CustomEvent('containerState', {
+            detail: {
+              globalUrl: event.url,
+            },
+          })
+        );
+      });
+
+    window.addEventListener('productState', (event: any) => {
+      if (event && event.detail) {
+        const { cartItemCount } = event.detail;
+        this.store.dispatch(AppActions.setCartItemCount({ cartItemCount }));
+      }
+    });
+  }
 }

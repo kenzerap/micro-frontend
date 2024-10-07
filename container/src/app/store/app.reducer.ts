@@ -2,22 +2,20 @@ import { createReducer, on } from '@ngrx/store';
 import * as AppActions from './app.actions';
 
 export interface State {
-  counter: number;
+  cartItemCount: number;
 }
 
 export const initialState: State = {
-  counter: 0,
+  cartItemCount: 0,
 };
 
 export const reducer = createReducer(
   initialState,
-  on(AppActions.increment, (state) => ({
+  on(AppActions.setCartItemCount, (state, { cartItemCount }) => ({
     ...state,
-    counter: state.counter + 1,
+    cartItemCount: cartItemCount,
   })),
-  on(AppActions.decrement, (state) => ({
-    ...state,
-    counter: state.counter - 1,
-  })),
-  on(AppActions.reset, (state) => ({ ...state, counter: 0 }))
+  on(AppActions.reset, () => ({
+    ...initialState,
+  }))
 );

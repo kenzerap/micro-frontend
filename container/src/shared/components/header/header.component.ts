@@ -5,8 +5,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { RouterLink, RouterModule } from '@angular/router';
 import { Store } from '@ngrx/store';
-import * as AppActions from '../../../app/store/app.actions';
-import { selectCounterValue } from '../../../app/store/app.selector';
+import { selectCartItemCount } from '../../../app/store/app.selector';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -25,16 +24,13 @@ import { Observable } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent implements OnInit {
-  counter$: Observable<number>;
+  cartItemCount$: Observable<number>;
 
   constructor(private store: Store) {
-    this.counter$ = this.store.select(selectCounterValue);
+    this.cartItemCount$ = this.store.select(selectCartItemCount);
   }
 
   ngOnInit(): void {}
 
-  increment() {
-    console.log('increment');
-    this.store.dispatch(AppActions.increment());
-  }
+  login() {}
 }

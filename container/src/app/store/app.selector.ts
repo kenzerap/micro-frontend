@@ -3,7 +3,7 @@ import * as fromApp from './app.reducer';
 
 export const selectApp = createFeatureSelector<fromApp.State>('app');
 
-export const selectCounterValue = createSelector(
+export const selectCartItemCount = createSelector(
   selectApp,
-  (state: fromApp.State) => state.counter
+  (state: fromApp.State) => state.cartItemCount
 );
