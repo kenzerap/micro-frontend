@@ -21,3 +21,29 @@
 .logo {
   font-weight: bold;
 }
+
+.right-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.cart {
+  position: relative;
+  cursor: pointer;
+}
+
+.cart-items {
+  position: absolute;
+  top: -12px;
+  right: -16px;
+  color: white;
+  width: 1.5rem;
+  height: 1.5rem;
+  background-color: red;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
