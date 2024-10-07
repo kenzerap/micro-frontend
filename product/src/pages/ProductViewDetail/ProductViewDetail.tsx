@@ -16,6 +16,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getProductById } from '../../store/reducers/productSlice';
 import * as fromReducer from '../../store/reducers';
 import { useParams } from 'react-router-dom';
+import { addToCart } from '../../store/reducers/cartShoppingSlice';
 
 export default function ProductViewDetail() {
   const dispatch = useDispatch();
@@ -43,14 +44,13 @@ export default function ProductViewDetail() {
   };
 
   const addCartProductHandler = () => {
-    /* if (quantity > 0) {
+    if (quantity > 0 && productDetail) {
       dispatch(
         addToCart({
-          item: data,
-          quantity,
+          item: productDetail,
         })
       );
-    } */
+    }
   };
 
   useEffect(() => {
